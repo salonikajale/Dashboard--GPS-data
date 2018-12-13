@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Drawing Tools</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        width: 400px;
+        height: 400px;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="map"></div>
+      <button id="btn1">btn1</button>
+      <button id="btn2">btn2</button>
+    </div>
+    <script
+             src="https://code.jquery.com/jquery-3.3.1.min.js"
+             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+             crossorigin="anonymous"></script>
+    <script>
+      // This example requires the Drawing library. Include the libraries=drawing
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=drawing">
+      var flag = true;
+    function initMap() {
+      var map;
+    	// var myLatLng = {lat: -25.363, lng: 131.044};
+      var myLatLng = {lat: 19.0760, lng: 72.8777};
+
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: myLatLng,
+        zoom: 6
+      });
+
+      var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+      var marker = new google.maps.Marker({
+              position: myLatLng,
+              map: map,
+              title: 'Hello World!',
+              icon: image
+              });
+
+      $('#btn1').click(function(e) {
+        console.log("btn1");
+        var lat = -25.363;
+        var lng = 131.044;
+        var location = new google.maps.LatLng(lat, lng);
+        map.setCenter(location);
+        marker.setPosition(location);
+      });
+
+      $('#btn2').click(function(e) {
+        console.log("btn2");
+        var lat = 19.0760;
+        var lng = 72.8777;
+        var location = new google.maps.LatLng(lat, lng);
+        map.setCenter(location);
+        marker.setPosition(location);
+      });
+
+      // var flag = true;
+      // while (true) {
+      //   var location;
+      //
+      //   if (flag) {
+      //     var lat = 19.0760;
+      //     var lng = 72.8777;
+      //     flag = false;
+      //     location = new google.maps.LatLng(lat, lng);
+      //   } else {
+      //     var lat = -25.363;
+      //     var lng = 131.044;
+      //     location = new google.maps.LatLng(lat, lng);
+      //     flag = true
+      //   }
+      //   map.setCenter(location);
+      //   marker.setPosition(location);
+      // }
+
+      if(flag) {
+          var lat = -25.363;
+          var lng = 131.044;
+          flag = false;
+      } else {
+          var lat = 19.0760;
+          var lng = 72.8777;
+          flag = true;
+      }
+
+      // Set lat and lng in a for loop and move the following block inside the loop.
+      var location = new google.maps.LatLng(lat, lng);
+      map.setCenter(location);
+      marker.setPosition(location);
+      window.setTimeout(initMap,2000);
+    }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYOiQcs2BYb60M6JImPYvnlPYUbB3nyDQ&libraries=drawing&callback=initMap"
+         async defer></script>
+  </body>
+</html>
